@@ -2,11 +2,15 @@
   "name": "hw3",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
+
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc -w --project . & nodemon ./dist/index.js"
+    "build": "tsc -w --project . ",
+    "start": "nodemon ./dist/index.js & tsc -w --project . "
   },
+
   "keywords": [],
   "author": "",
   "license": "ISC",

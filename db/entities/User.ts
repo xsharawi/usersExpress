@@ -1,10 +1,12 @@
-import { BaseEntity, Column, Entity,PrimaryGeneratedColumn  } from "typeorm";
+import { BaseEntity, BeforeInsert, Column, Entity,JoinColumn,JoinTable,ManyToMany,OneToOne,PrimaryGeneratedColumn  } from "typeorm";
+import { Profile } from "./Profile.js";
+import { Role } from "./Role.js";
 
 @Entity()
 export class User extends BaseEntity{
 
-    @PrimaryGeneratedColumn('uuid')
-    id: string 
+    @PrimaryGeneratedColumn('increment')
+    id: number 
 
     @Column('varchar',{length: 50, nullable: true})
     fullName: string
@@ -12,14 +14,29 @@ export class User extends BaseEntity{
     @Column('text',{unique:true})
     email: string
 
-    @Column({length:10})
+    @Column()
     password: string
 
+    // role:
+    // rename it and make the relationship many to many
     @Column('enum',{enum: [
-        'normal',
+        'user',
         'admin',
-        'moderator'
+        'editor'
     ],
-     nullable: true})
+    default : 'user',
+     nullable: true,
+    })
     type: string
+
+    @OneToOne(()=>Profile, p => p.id ,{eager: true})
+    @JoinColumn()
+    profile: Profile
+
+    @ManyToMany(()=>Role, r => r.users, {eager:true})
+    @JoinTable()
+    roles: Role[]
+
+
+
 }
