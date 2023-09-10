@@ -10,3 +10,4 @@ you'll also need `npm install reflect-metadata --save`
 # Usage
 - to use the get endpoint all you need is to send a get request to `http://{hostname}/user`
 - to use the register endpoint you'll need to use `http://{hostname}/user/register` and include a json object that includes but not limited to `email` and `password`
+- to add RDS support just open a .env file and add the needed values
